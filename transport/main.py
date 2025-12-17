@@ -21,8 +21,8 @@ vehicles = [
 ]
 def show_all_clients():
     print("\n" + "="*50)
-    print("ВСЕ КЛИЕНТЫ")
-    print("="*50)
+    print("Все клиенты")
+    print(" "*10)
     print(f"Всего клиентов: {len(clients)}\n")
     for i, client in enumerate(clients, 1):
         vip = " (VIP)" if client.is_vip else ""
@@ -30,7 +30,7 @@ def show_all_clients():
         print(f"   Вес груза: {client.cargo_weight} кг")
         print()
 def show_client_by_id():
-    print("\nПОИСК КЛИЕНТА ПО НОМЕРУ")
+    print("\nПоиск клиента")
     try:
         client_id = int(input("Введите номер клиента: "))
         if 1 <= client_id <= len(clients):
@@ -40,41 +40,27 @@ def show_client_by_id():
             print(f"  Имя: {client.name}")
             print(f"  Вес груза: {client.cargo_weight} кг")
             print(f"  VIP статус: {vip}")
-        else:
-            print("Клиент с таким номером не найден")
-    except:
-        print("Ошибка ввода")
 def add_client():
-    print("\nДОБАВЛЕНИЕ НОВОГО КЛИЕНТА")
+    print("\nДобавление клиента")
     name = input("Имя клиента: ")
-    try:
         weight = float(input("Вес груза (кг): "))
-        if weight <= 0:
-            print("Вес должен быть больше 0")
-            return
-    except:
-        print("Неверный формат веса")
         return
     vip = input("VIP клиент? (да/нет): ").lower()
     is_vip = vip in ['да', 'yes', 'y', 'д']
     clients.append(Client(name, weight, is_vip))
-    print(f"Клиент '{name}' добавлен!")
+    print(f"Клиент '{name}' добавлен")
 def delete_client():
-    print("\nУДАЛЕНИЕ КЛИЕНТА")
+    print("\nУдаление клиента")
     show_all_clients()
     try:
         client_id = int(input("Введите номер клиента для удаления: "))
         if 1 <= client_id <= len(clients):
             deleted = clients.pop(client_id-1)
-            print(f"Клиент '{deleted.name}' удален!")
-        else:
-            print("Клиент с таким номером не найден")
-    except:
-        print("Ошибка ввода")
+            print(f"Клиент '{deleted.name}' удален")
 def show_vehicles():
-    print("\n" + "="*50)
-    print("ВЕСЬ ТРАНСПОРТ")
-    print("="*50)
+    print("\n" + " "*50)
+    print("Весь транспорт")
+    print(" "*20)
     print(f"Всего единиц транспорта: {len(vehicles)}\n")
     for i, vehicle in enumerate(vehicles, 1):
         used = vehicle.current_load / (vehicle.capacity * 1000) * 100
@@ -88,7 +74,7 @@ def show_vehicles():
                 print(f"     - {client.name}{vip}: {client.cargo_weight} кг")
         print()
 def distribute_cargo():
-    print("\nРАСПРЕДЕЛЕНИЕ ГРУЗОВ")
+    print("\nРаспределенение грузов")
     for vehicle in vehicles:
         vehicle.current_load = 0
         vehicle.clients = []
@@ -103,15 +89,13 @@ def distribute_cargo():
                 loaded = True
                 loaded_count += 1
                 break
-        if not loaded:
-            print(f"Не удалось разместить груз клиента {client.name}")
-    print(f"\nРаспределение завершено!")
+    print(f"\nРаспределение завершено")
     print(f"Загружено {loaded_count} из {len(clients)} клиентов")
     show_distribution_results()
 def show_distribution_results():
-    print("\n" + "="*50)
-    print("РЕЗУЛЬТАТЫ РАСПРЕДЕЛЕНИЯ")
-    print("="*50)
+    print("\n" + " "*50)
+    print("Результаты")
+    print(" "*50)
     for i, vehicle in enumerate(vehicles, 1):
         if vehicle.current_load > 0:
             used = vehicle.current_load / (vehicle.capacity * 1000) * 100
@@ -126,8 +110,8 @@ def show_distribution_results():
 def main():
     while True:
         print("\n" + "="*40)
-        print("МЕНЮ УПРАВЛЕНИЯ ГРУЗОПЕРЕВОЗКАМИ")
-        print("="*40)
+        print("Управление грузоперевозками")
+        print(" "*40)
         print("1. Вывести всех клиентов")
         print("2. Вывести клиента по номеру")
         print("3. Добавить клиента")
@@ -136,7 +120,7 @@ def main():
         print("6. Распределить грузы")
         print("7. Вывести результаты распределения")
         print("8. Выйти из программы")
-        print("-"*40)
+        print(" "*40)
         choice = input("Выберите пункт меню (1-8): ")
         if choice == "1":
             show_all_clients()
@@ -153,12 +137,10 @@ def main():
         elif choice == "7":
             show_distribution_results()
         elif choice == "8":
-            print("До свидания!")
+            print("Всего доброго")
             break
-        else:
-            print("Неверный выбор. Попробуйте снова.")
 if __name__ == "__main__":
-    print("="*50)
-    print("СИСТЕМА УПРАВЛЕНИЯ ГРУЗОПЕРЕВОЗКАМИ")
-    print("="*50)
+    print(" "*50)
+    print("Система управления")
+    print(" "*50)
     main()
